@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% block title %}Information{% endblock %}
+{%block content %}
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/static/data/nv.d3.css" />
+<script src="/static/data/d3.min.js"></script>
+<script src="/static/data/nv.d3.js"></script>
+<!-- 
+<style>
+#chart svg {
+	height: 400px;
+}
+</style>
+</head>
+
+<div id="chart">
+	<svg>
+
+
+	<script>
+	data = [{'color': '#008000', 'key': 'Labeled_data', 'values': [[1479002400000, 100], [1479088800000, 135], [1479175200000, 267], [1479261600000, 69], [1479348000000, 172], [1479434400000, 28], [1479693600000, 32]]}];
+	
+		  nv.addGraph(function() {
+		      var chart = nv.models.linePlusBarChart()
+		            .margin({top: 30, right: 60, bottom: 50, left: 70})
+		            //We can set x data accessor to use index. Reason? So the bars all appear evenly spaced.
+		            .x(function(d,i) { return i })
+		            .y(function(d,i) {return d[1] })
+		            ;
+
+		      chart.xAxis.tickFormat(function(d) {
+		        var dx = data[0].values[d] && data[0].values[d][0] || 0;
+		        return d3.time.format('%x')(new Date(dx))
+		      });
+
+		      chart.y1Axis
+		          .tickFormat(d3.format(',f'));
+
+		      chart.y2Axis
+		          .tickFormat(function(d) { return '' + d3.format(',f')(d) });
+
+		      chart.bars.forceY([0]);
+
+		      d3.select('#chart svg')
+		        .datum(data)
+		        .transition()
+		        .duration(0)
+		        .call(chart);
+
+		      nv.utils.windowResize(chart.update);
+
+		      return chart;
+		  });</script>
+	</svg>
+</div>
+
+ -->
+<style>
+#chart svg {
+	height: 400px;
+}
+</style>
+
+
+<div id="chart">
+	<svg>	</svg>
+</div>
+
+	<script>
+	data = {{g.count_data | safe}};
+	nv.addGraph(function() {
+		  var chart = nv.models.multiBarHorizontalChart()
+		      .x(function(d) { return d.label })
+		      .y(function(d) { return d.value })
+		      .margin({top: 30, right: 20, bottom: 50, left: 175})
+		      .showValues(true)
+		      .showControls(false);
+
+		  chart.yAxis
+		      .tickFormat(d3.format(',.2f'));
+
+		  d3.select('#chart svg')
+		      .datum(data)
+		    .transition().duration(500)
+		      .call(chart);
+
+		  nv.utils.windowResize(chart.update);
+
+		  return chart;
+		});
+	</script>
+
+{% endblock %}

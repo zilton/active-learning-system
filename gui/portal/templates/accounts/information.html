@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Information{% endblock %}
+{%block content %}
+	{% if g.user %}
+		
+			  <h1><font color="#00adff">User information</font></h1>
+			  <br/><br/>
+			  <font size=4>
+			  <strong>Name: </strong>{{g.user.name}}<br/><br/>
+			  <strong>Email: </strong>{{g.user.email}}<br/><br/>
+			  <strong>Institution: </strong>{{g.user.institution}}<br/><br/>
+			  <strong>Username: </strong>{{g.user.username}}<br/><br/>
+			  <a href="https://en.gravatar.com/gravatars/new/computer" target="_blank"><button type="button" class="btn btn-primary">Change photo</button></a><br/><br/>
+			  <a href="/recover-password"><button type="button" class="btn btn-primary">Change password</button></a><br/><br/>
+			  {% if not g.user.is_superuser %}
+			  	<a href="{{url_for('accounts_app.requests_admin_privileges')}}"><button type="button" class="btn btn-warning">Request admin privileges</button></a><br/><br/>
+			  {% endif %}
+			  <br/><br/>
+			  <br/><br/>
+	
+	{% endif%}
+{% endblock %}

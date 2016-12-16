@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <center><h3>Update project</h3></center>
+</div>
+
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    if ("{{form.nameup.data}}" != "--Select--") {
+    	if ("{{form.nameup.data}}" != "None")
+    	window.location.href = "{{ url_for('system_app.update_project', projectName=form.nameup.data, up_proj=False) }}";
+    }
+</script>
+						
+<form method="post" class="form-horizontal">
+  {{ form.hidden_tag() }}
+  {% import 'form_macro.html' as form_macro %}
+	<div class='row-fluid'>
+		<div class='span4'>
+				{{ form_macro.form_field(form.nameup, with_label=True) }}
+				
+		</div>
+		<div class='span2'>
+			<a 
+				class="confirmation">
+				<input type="image" src="/static/img/load.ico" style="width:17%;" title="Load information of the project.">
+			</a>
+		</div>
+		<div class='span6'>
+			
+		</div>
+	</div>
+  </br>
+  <!-- <div class="page-header"></div> -->
+  
+  		<div class='row-fluid'>
+			<div class='span4'>
+
+			</div>
+			<div class='span2'></div>
+			<div class='span6'>
+
+			</div>
+		</div>
+</form>
+
+{% endblock %}

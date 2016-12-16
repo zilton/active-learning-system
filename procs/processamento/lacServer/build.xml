@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+	26/12/2012 11:29:38														
+
+	Observatório da Web - LAC Server	
+	Constrói a versão Java do LAC Server
+				   
+	 walter																
+	 ====================================================================== -->
+<project name="Observatório da Web - LAC Server" default="default">
+	<description>
+		Constrói a versão Java do LAC Server
+	</description>
+	<property name="target" value="bin"/>
+	<path id="libs">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	<!-- ================================= 
+		  target: default			  
+		 ================================= -->
+	<target name="default" depends="compile" description="Constrói a versão Java do LAC Server">
+		
+	</target>
+	<target name="compile">
+		<mkdir dir="bin"/>
+		<javac srcdir="src" destdir="${target}" classpathref="libs" debug="on">
+		</javac>
+		<copy todir="${target}">
+			<fileset dir="resources"/>
+		</copy>
+	</target>
+
+</project>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <center><h3>Delete project</h3></center>
+</div>
+
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    if ("{{form.nameup.data}}" != "--Select--") {
+    	if ("{{form.nameup.data}}" != "None")
+    	window.location.href = "{{ url_for('system_app.delete_project', project_name=form.nameup.data) }}";
+    }
+</script>
+						
+<form method="post" class="form-horizontal">
+  {{ form.hidden_tag() }}
+  {% import 'form_macro.html' as form_macro %}
+	<div class='row-fluid'>
+		<div class='span4'>
+				{{ form_macro.form_field(form.nameup, with_label=True) }}
+				
+		</div>
+		<div class='span2'></div>
+		<div class='span6'>
+			<a 
+				class="confirmation">
+				<input type="image" src="/static/img/remove.png" style="width:7%;" title="Delete project.">
+			</a>
+		</div>
+	</div>
+  </br>
+  <!-- <div class="page-header"></div> -->
+  
+  		<div class='row-fluid'>
+			<div class='span4'>
+
+			</div>
+			<div class='span2'></div>
+			<div class='span6'>
+
+			</div>
+		</div>
+</form>
+
+{% endblock %}

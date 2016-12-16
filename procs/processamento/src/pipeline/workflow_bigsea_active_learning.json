@@ -1,0 +1,31 @@
+{
+	"global": {
+		"rabbitmq": ["10.5.5.4", "active_learning", "bigsea", "bigsea"],
+		"mongodb": "oxumare.ctweb.inweb.org.br",
+		"mongodb_updater" : {"mongodb" : "mongodb4.ctweb.inweb.org.br",
+							 "db" : "active_learning",
+							 "collection" : "tweets"
+							},
+		"trigrams": "../trigrams/",
+		"workflow-dir": "workflows/",
+		"lac-classification-server": ["localhost", 40000],
+		"lac-dir" : "lac-basedir/",
+		"contexts": ["1000"],
+		
+		"fields": {
+       		"tweets": [
+	           "_id", "id", "text", "created_at", "geo", "place", "coordinates", "entities", 
+	            "_tmp_", "control", "lang",
+	
+	            "user.id", "user.screen_name", "user.location", "user.profile_image_url", 
+	            "user.profile_image_url_https", "user.friends_count", "user.followers_count", 
+	            "user.description", "user.lang",
+	
+	            "retweeted_status.id", "retweeted_status.text", "retweeted_status.created_at",
+	            "retweeted_status.user.id", "retweeted_status.user.screen_name",
+	            "retweeted_status.retweet_count", "retweeted_status.entities"
+                                                ]
+ 		},
+		"stop-words": { }
+	}
+}

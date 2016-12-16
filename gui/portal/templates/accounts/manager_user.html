@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+	{% block title %}Dashboard{% endblock %}
+		{%block content %}
+			{% if g.user.is_superuser %}
+				<h1>
+					<center><font color="#00adff">Users</font><center />
+				</h1>
+				<br/><br/>
+				
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							{% for label in g._user_label %}
+							<th>
+								<font color="black"><center>{{label}}</center></font>
+							</th> {% endfor %}
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							{% for user in g.all_users %}
+								<tr>
+									<td>
+										<center>
+											<font><b>{{user.name}}</b></font>
+										</center>
+									</td>
+									<td>
+										<center>
+											<font><b>{{user.username}}</b></font>
+										</center>
+									</td>
+									<td>
+										<center>
+											<font><b>{{user.email}}</b></font>
+										</center>
+									</td>
+									<td>
+										<center>
+											<font><b>{{user.institution}}</b></font>
+										</center>
+									</td>
+									<td>
+										<center>
+											<select>
+											{% for p in user.control.projects %}
+												<option value={{p}}>{{p}}</option>
+											{% endfor %}
+											</select>
+										</center>
+								    </td>
+									<td>
+										<center>
+											<a
+												href="{{url_for('accounts_app.change_active', active=not user.is_active, username=user.username) }}">
+												{% if user.is_active %}
+													<input class="btn btn-success" type="submit" name="submit" value={{user.is_active}} title="Turn {{not user.is_active}} - the access for the user {{user.name}}">
+												{% else %}
+													<input class="btn btn-danger" type="submit" name="submit" value={{user.is_active}} title="Turn {{not user.is_active}} - the access for the user {{user.name}}">
+												{% endif %}
+											</a>
+										</center>
+									</td>
+									<td>
+										<center>
+											<a href="{{url_for('accounts_app.change_admin', superuser=not user.is_superuser, username=user.username) }}">
+												{% if user.is_superuser %}
+													<input class="btn btn-success" type="submit" name="submit" value="{{user.is_superuser}} " title="Turn {{ not user.is_superuser }} - the admin privileges for the user {{user.name}}">
+												{% else %}
+													<input class="btn btn-danger" type="submit" name="submit" value={{user.is_superuser}} title="Turn {{ not user.is_superuser }} - the admin privileges for the user {{user.name}}">
+												{% endif %}
+											</a>
+										</center>
+									</td>	
+									<td>
+										<center>
+											<a
+												href="{{url_for('accounts_app.remove_user', username=user.username) }}" class="confirmation">
+												<input type="image" src="/static/img/remove.png" style="width:10%;" title="Remove the user {{ user.name }}">
+											</a>
+										</center>
+									</td>	
+								</tr>
+								<p></p>
+							{% endfor %}
+						</tr>
+						<script type="text/javascript">
+						    var elems = document.getElementsByClassName('confirmation');
+						    var confirmIt = function (e) {
+						        if (!confirm('Are you sure?')) e.preventDefault();
+						    };
+						    for (var i = 0, l = elems.length; i < l; i++) {
+						        elems[i].addEventListener('click', confirmIt, false);
+						    }
+						</script>
+					</tbody>
+				</table>
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			{% endif%}
+		{% endblock %}
+			
+

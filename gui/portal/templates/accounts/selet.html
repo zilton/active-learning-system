@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+	{% block title %}Dashboard{% endblock %}
+		{%block content %}
+			{% if g.user.is_superuser %}
+				<h1>
+					<center><font color="#00adff">Select the page for managing</font><center />
+				</h1>
+				<br/><br/>
+			  <br/><br/>
+				<div class="container">
+					<div class="row-fluid">
+					<div class="span3"></div>
+						<div class="span3">
+							<center>
+								<a href="{{ url_for('system_app.new_project') }}"><img src='/static/img/dashboard.ico' width='20%' title="System manager"/></a> 
+								<center />
+						</div>
+						
+						<div class="span3">
+							<center>
+								<a href="{{ url_for('accounts_app.manager_user') }}"><img src='/static/img/users.png' width='20%' title="User manager"/></a> 
+								<center />
+						</div>
+						<div class="span3"></div>
+					</div>
+				</div>
+			  <br/><br/>
+			  <br/><br/>
+			  <br/><br/>
+			  <br/><br/>
+			{% endif%} {% endblock %}
+			
+<!-- 
+			  <br/><br/>
+			  <a
+					href="{{url_for('accounts_app.manager', sentiment='positive', _id=g.tweet._id) }}">
+					<input class="btn btn-success" type="checkbox" name="submit" value="true">
+				</a>
+			  <font size=4>
+			  <strong>Name: </strong>{{g.user.name}}<br/><br/>
+			  <strong>Email: </strong>{{g.user.email}}<br/><br/>
+			  <strong>Username: </strong>{{g.user.username}}<br/><br/>
+			  <a href="https://en.gravatar.com/gravatars/new/computer" target="_blank"><button type="button" class="btn btn-primary">Change photo</button></a><br/><br/>
+			  <a href="/recover-password"><button type="button" class="btn btn-primary">Change password</button></a><br/><br/>
+			  <br/><br/>
+			  <br/><br/> -->

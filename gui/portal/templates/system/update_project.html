@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <center><h3>Update project</h3></center>
+</div>
+			
+<form action="{{ url_for('system_app.update_project', projectName=form.nameup.data, up_proj=True) }}" method="post" class="form-horizontal">
+  {{ form.hidden_tag() }}
+  {{ form.csrf_token }}
+  {% import 'form_macro.html' as form_macro %}
+	<div class='row-fluid'>
+		<div class='span4'>
+			<h4>Project details</h4>
+				{{ form_macro.form_field(form.nameup, with_label=True) }}
+				{{ form_macro.form_field(form.languages, with_label=True) }}
+				{{ form_macro.form_field(form.is_active, with_label=True) }}
+		</div>
+		<div class='span2'>
+			<h4></br></h4>
+		</div>
+		<div class='span6'>
+			<h4>MongoDB connection</h4>
+			{{ form_macro.form_field(form.host, with_label=True) }}
+			{{ form_macro.form_field(form.database, with_label=True) }}
+			{{ form_macro.form_field(form.collection, with_label=True) }}
+			{{ form_macro.form_field(form.port, with_label=True) }}
+			
+		</div>
+	</div>
+  </br>
+  <!-- <div class="page-header"></div> -->
+  <center><h4>Training configuration</h4></center>
+  		<div class='row-fluid'>
+			<div class='span4'>
+				{{ form_macro.form_field(form.nameTrain, with_label=True) }}
+				{{ form_macro.form_field(form.stop_word, with_label=True) }}
+				{{ form_macro.form_field(form.remove_stops_first, with_label=True) }}
+				{{ form_macro.form_field(form.stemmer, with_label=True) }}
+			</div>
+			<div class='span2'></div>
+			<div class='span6'>
+				{{ form_macro.form_field(form.classes, with_label=True) }}
+				{{ form_macro.form_field(form.colors, with_label=True) }}
+				<div class="control-group ">
+					<label for="colors" class="control-label">Verify the color code:</label>
+					<div class="controls ">
+						<input id="color-select" class="jscolor" value="2B6DFF" title="Only to verify the color value.">
+					</div>
+				</div>
+				{{ form_macro.form_field(form.classifier, with_label=True) }}
+				{{ form_macro.form_field(form.ngram_size, with_label=True) }}
+				{{ form_macro.form_field(form.max_words, with_label=True) }}
+			</div>
+		</div>
+		<h5>Self-training configuration</h5>
+				{{ form_macro.form_field(form.threshold, with_label=True) }}
+  
+  <div class="form-actions">
+  	<div class='row-fluid'>
+		<div class='span4'>
+		    <button type="submit" class="btn btn-icon btn-primary">Update</button>
+		    <a href="{{ url_for('system_app.load_project') }}">Choose other project</a>
+	    </div>
+	    <div class='span5'></div>
+		<div class='span3'>
+			<div class="confirmation">
+				<a>
+					<input type="image" src="/static/img/remove.png" style="width:15%;" title="Remove the project {{ form.nameup.data }}">
+				</a>
+			</div>
+		</div>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) {
+        	e.preventDefault();
+    	}
+        else {
+        	window.location.href = "{{url_for('system_app.delete_project', project_name=form.nameup.data) }}";
+        	e.preventDefault();
+        }
+                
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+
+{% endblock %}

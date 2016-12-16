@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Information{% endblock %}
+{%block content %}
+	{% if g.user %}
+		
+			  <h1><font color="#00adff">Projects</font></h1>
+			  <br/><br/>
+			  <font size=4>
+			  
+					{% for proj in g.all_projects %}
+					<ul style="list-style-type:none"></ul>
+				  		<div class='row'>
+							<div class='span2'>
+					  			<li>{{proj[0]}}</li>
+					  		</div>
+					  		<div class="span2"></div>
+							<div class='span8'>
+					  			<a href="{{url_for('pages_app.add_remove_project', project=proj[0], action=not proj[1]) }}">
+									{% if proj[1] %}
+										<input type="image" src="/static/img/project_delete.ico" style="width:4%;" value={{proj[1]}} title="Remove project {{proj[0]}} from your project list.">
+									{% else %}
+										<input type="image" src="/static/img/project_add.ico" style="width:4%;" value={{proj[1]}} title="Add project {{proj[0]}} to your project list.">
+									{% endif %}
+								</a>
+								
+							</div>
+						</div>
+						</br>
+					</ul>
+			  		{% endfor %}
+			  </font>
+			  </br>
+			  </br>
+			  </br>
+			  </br>
+			  
+			  <!-- 
+			  <strong>Name: </strong>{{g.user.name}}<br/><br/>
+			  <strong>Email: </strong>{{g.user.email}}<br/><br/>
+			  <strong>Institution: </strong>{{g.user.institution}}<br/><br/>
+			  <strong>Username: </strong>{{g.user.username}}<br/><br/>
+			  <a href="https://en.gravatar.com/gravatars/new/computer" target="_blank"><button type="button" class="btn btn-primary">Change photo</button></a><br/><br/>
+			  <a href="/recover-password"><button type="button" class="btn btn-primary">Change password</button></a><br/><br/>
+			  <a href="/recover-password"><button type="button" class="btn btn-primary">Request admin privileges</button></a><br/><br/>
+			  <br/><br/>
+			  <br/><br/> -->
+	
+	{% endif%}
+{% endblock %}

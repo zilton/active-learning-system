@@ -1,0 +1,26 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site_name }} - Requests Admin Privileges</title>
+</head>
+<body>
+<p>
+  Hello, {{admin_name}}!
+</p>
+<p>
+  Click on the link below to confirm administrator privileges for the user <b>{{g.user.name}}</b> (username: {{g.user.username}}).
+</p>
+<p>
+  	<a href="{{ site_url }}{{url_for('accounts_app.change_admin', superuser=not g.user.is_superuser, username=g.user.username) }}">
+		{% if not g.user.is_superuser %}
+			<input class="btn btn-success" type="submit" name="submit" value="Assign" title="Turn {{ not g.user.is_superuser }} - the admin privileges for the user {{g.user.name}}">
+		{% endif %}
+	</a>
+</p>
+<p>Ignore this message, if the user {{g.user.name}} can't gain administrator permission.</p>
+<p>
+  Thanks,<br />
+  {{ site_name }}
+</p>
+</body>
+</html>

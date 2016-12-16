@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+  {% if g.user %}
+  <h3>Welcome, {{ g.user.name }}!</h3>
+  
+  
+  <div class="row-fluid">
+  	<div class="span12">
+  		<legend><font color="#676767">Overview</font></legend>
+  		<p align="justify">
+  			<font size="3" color="#111111">
+  				In this system you have access to the EUBRA-BIGSEA LAC Active Learning and Self-training.</br>
+  				The main purpose of the system is to enable the creation of more accurate databases for classification 
+  				and/or sentiment analysis in Twitter messages. If you are an administrator, the system will allow you to 
+  				create a new project, with no need for any training for LAC classifier. 
+  				The system was built to work in real-time data flow, ensuring that the LAC classifier evolves according 
+  				to the dynamics of each project.
+  			</font>
+  		</p>
+  		<legend><font color="#676767">Projects</font></legend>
+  		<p align="justify">
+  			<font size="3" color="#111111">
+  				It is necessary to have a collection of data in mongodb to initialize the system. 
+  				The messages displayed to the user are selected based on the evolution of the LAC classifier, 
+  				which is measured according to the amount of rules generated. 
+  				A message that generated the least amount of rules in a 150-size window is selected. 
+  				It is possible to set the number of classes, N-grams size, stemming, stop words, language and 
+  				with respect to self-training it is possible to determine the threshold  (accuracy) for a message to be 
+  				inserted directly into the LAC classifier training, without the need to be presented for user labeling.
+  			</font>
+  		</p>
+  		<legend><font color="#676767">Background</font></legend>
+  		<p align="justify">
+  			<font size="3" color="#111111">
+  				All processes are initialized and stopped automatically. 
+  				The system allows the administrator to configure all the parameters referring to the projects 
+  				that he is registered, activate and deactivate a project, manage the users and follow the statistics 
+  				of the projects and use of the system by the users.
+  			</font>
+  		</p>
+  	</div>
+  </div>
+  
+  {% else %}
+  <h3>Welcome, Guest!</h3>
+  <h5>To use the Active Learning System, please login.</h5>
+  {% endif%}
+  	<br />
+	<br />
+	<br />
+	<br />
+  
+  
+
+{% endblock %}

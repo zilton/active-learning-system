@@ -1,0 +1,109 @@
+{% extends 'base.html' %} {% block title %}Training{% endblock %} {%
+block content %} {% if g.user %} {% if g.tweet %}
+<center>
+	<div class='row'>
+		<div class='span2'></div>
+		<div class='span8' style='padding: 100px 50px 50px 50px;'>
+			<div class="well well-small">
+				<div title="Label this tweet.">
+					<h2>{{ g.tweet.text }}</h2>
+					<h5 class="panel-title">
+						<p align=right>{{ g.tweet.created_at }}</p>
+					</h5>
+				</div>
+				
+				{% for item in g.class_color %}
+					<a
+						href="{{url_for('pages_app.classification', sentiment=item[0]+';'+g.project, _id=g.tweet._id) }}">
+						<button class="btn btn-default" style="background:#{{item[1]}}" type="button" name="submit" value="{{item[0]}}">
+						&nbsp;
+						</button>
+						<span>{{item[0]}}</span>
+						&nbsp;&nbsp;&nbsp;
+						<!-- <input style ="background-color:#{{item[1]}}" type="submit" name="submit" value={{item[0]}}> -->
+					</a>
+				{% endfor %}
+				<!-- 
+				<a
+					href="{{url_for('pages_app.classification', sentiment='positive', _id=g.tweet._id) }}">
+					<input class="btn btn-success" type="submit" name="submit" value="Positive">
+				</a>
+				<a
+					href="{{url_for('pages_app.classification', sentiment='neutral', _id=g.tweet._id) }}">
+					<input class="btn btn-primary" type="submit" name="submit" value="Neutral">
+				</a>
+				<a
+					href="{{url_for('pages_app.classification', sentiment='negative', _id=g.tweet._id) }}">
+					<input class="btn btn-danger" type="submit" name="submit" value="Negative">
+				</a>
+				 -->
+			</div>
+			<!-- 
+			<div style='border: 2px solid rgba(10, 10, 10, 0.1);'>
+				<h3 class="panel-title">
+					<p align=center><font color="#00adff"><b>Automatic classification</p></b></font>
+				</h3>
+				-->
+				<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							{% for metric in g.metrics %}
+							<th>
+								<center>{{metric}}</center>
+							</th> {% endfor %}
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							{% for classifier in g.values %} {% for value in classifier %} {%
+							if value == "positive" %}
+							<td><center>
+									<font color="green"><b>{{value}}</b></font>
+								</center></td>
+							{% elif value == "negative" %}
+							<td><center>
+									<font color="red"><b>{{value}}</b></font>
+								</center></td>
+							{% elif value == "neutral" %}
+							<td><center>
+									<font color="#00adff"><b>{{value}}</b></font>
+								</center></td>
+							{% elif value == "LAC" %}
+							<td><center>
+									<font color="#005882"><b>{{value}}</b></font>
+								</center></td>
+							{% else %}
+							<td>
+								<center>{{value}}</center>
+							</td> {% endif%} {% endfor %} {% endfor %}
+						</tr>
+					</tbody>
+				</table>
+			<!-- </div>-->
+     
+			<br />
+			<br />
+			<!-- <h3 class="panel-title"><p align=center>Text to be classified</p></h3> -->
+
+
+		</div>
+	</div>
+</center>
+
+{% else %}
+<center>
+	<h3>Sorry, we don't have tweets for classification.</h3>
+	<br />
+	<br />
+	<br />
+	<br />
+</center>
+{% endif%} {% else %}
+<meta http-equiv="refresh"
+	content="0; url={{ url_for('accounts_app.login') }}" />
+	
+<script src="jscolor.js"></script>
+
+{% endif%} {% endblock %}

@@ -1,0 +1,3 @@
+2
+transito_nao_transito	/scratch/bigsea_active_learning/treinos_lac/labelled_training__transito_LAC.txt
+sentiment_bigsea	/scratch/bigsea_active_learning/treinos_lac/labelled_training__EUBRA-BIGSEA_LAC.txt
