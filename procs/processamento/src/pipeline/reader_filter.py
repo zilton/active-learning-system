@@ -138,7 +138,7 @@ class ReaderFilter(BaseFilter):
 		self.add_backpressure_callback(back_pressure)
 
 		mongodb = self.workflow['global']['mongodb']['host']
-		conn = pymongo.Connection(mongodb, slave_okay=False)
+		conn = pymongo.Connection(mongodb, subordinate_okay=False)
 		oplog = conn.local['oplog.rs']
 		br_tz = pytz.timezone('America/Sao_Paulo')
 

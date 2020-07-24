@@ -23,7 +23,7 @@ class UpdaterFilter(BaseFilter):
 		self.timestamp = None
 		self.counter = 0
 		self.pid = os.getpid()
-		self.conn = pymongo.Connection(self.workflow['global']['mongodb-updater']['mongodb'], slave_okay=False)
+		self.conn = pymongo.Connection(self.workflow['global']['mongodb-updater']['mongodb'], subordinate_okay=False)
 		
 	def process(self):
 		try:
