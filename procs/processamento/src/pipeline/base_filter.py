@@ -558,7 +558,7 @@ class BaseFilter(object):
 			candidates = [m for m in rs_status['members'] if m['stateStr'] == 'SECONDARY']
 			
 			shuffle(candidates)
-			return pymongo.Connection(candidates[0]['name'], slave_okay=True)	
+			return pymongo.Connection(candidates[0]['name'], subordinate_okay=True)	
 		else:
 			return connection
 		
