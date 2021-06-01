@@ -16,5 +16,5 @@ simplejson==3.5.2
 six==1.7.3
 solrpy==0.9.6
 tornado==4.0.2
-urllib3==1.9
+urllib3==1.26.5
 wsgiref==0.1.2
