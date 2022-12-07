@@ -3,7 +3,7 @@ PyStemmer==1.3.0
 anyjson==0.3.3
 argparse==1.2.1
 backports.ssl-match-hostname==3.4.0.2
-certifi==14.05.14
+certifi==2022.12.7
 -e git+https://github.com/decultured/Python-Language-Detector.git@cf77eb42ee053e7e21ac9dd45b0ca68e75190bb2#egg=languageIdentifier-dev
 pika==0.9.13
 pyes==0.99.2
